@@ -2,3 +2,4 @@
 .ssh/
 .vim/
 .vimrc
+app/__pycache__/

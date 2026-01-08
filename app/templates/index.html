@@ -21,7 +21,8 @@
     </div>
 
     <script>
-        const socket = new WebSocket(`ws://${window.location.host}:6040/ws/mavlink`)
+        console.log(`ws://${window.location.hostname}:6040/ws/mavlink`)
+        const socket = new WebSocket(`ws://${window.location.hostname}:6040/ws/mavlink`)
 
         socket.addEventListener('message', function (event) {
             let data = JSON.parse(event.data)

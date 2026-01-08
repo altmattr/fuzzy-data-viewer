@@ -17,6 +17,7 @@ RUN echo 'export PS1="\[\e[38;5;251m\]\u@$TAG \w > \[\e[0m\]"' >> /root/.bashrc
 
 # copy over our app
 COPY app /app
+COPY entrypoint.sh entrypoint.sh
 
 # Add docker configuration
 LABEL permissions='{\
@@ -52,4 +53,4 @@ LABEL tags='[\
   "data"\
 ]'
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/working/entrypoint.sh"]
