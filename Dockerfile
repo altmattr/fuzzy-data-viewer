@@ -28,21 +28,23 @@ LABEL permissions='{\
     }\
   }\
 }'
+LABEL version="0.0.1"
 LABEL authors='[\
     {\
-        "name": "John Doe",\
-        "email": "john.doe@gmail.com"\
+        "name": "Matt Roberts",\
+        "email": "alt.mattr@gmail.com"\
     }\
 ]'
 LABEL company='{\
-    "about": "This is just an example",\
-    "name": "ACME Corporation",\
-    "email": "acme@corporation.com"\
+    "about": "Consultancy specialising in scientific software",\
+    "name": "ALT Scientific",\
+    "email": "alt.mattr@gmail.com"\
 }'
-LABEL readme="https://raw.githubusercontent.com/patrickelectric/blueos-extension-template/master/README.md"
-LABEL type="example"
+LABEL readme="https://raw.githubusercontent.com/altmattr/fuzzy-data-viewer/master/README.md"
+LABEL type="tool"
 LABEL tags='[\
-  "example"\
+  "mapping",\
+  "data"\
 ]'
 
 ENTRYPOINT ["/entrypoint.sh"]

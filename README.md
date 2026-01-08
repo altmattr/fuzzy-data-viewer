@@ -1,8 +1,8 @@
-# BlueOS Extension Template
+# Fuzzy Data Map Viewer for BlueOS
 
-This template provides you a foundation to kickstart your journey as a BlueOS extensions developer!
-Please follow the instructions to launch your first BlueOS application.
+Data from drone sensors can be _noisy_.  If you want to make decisions live based on noisy data, you need a good interface to help pyou make sense of it.  This extension provides an interface specifically designed for noisy data which is mixed in with (also noisy) GPS data.  I.e. GPS co-ordintes are bieing logged alon with _some other data stream_.  The second data stream is not attached to the GPS data (i.e. comes in a different time stamps), but it never too far from an associated GPS data point.  There may be a variable number of readings taken between GPS data points (including zero) and this extension takes care of all of that for you.
 
+If you have worked with drones, you know this is precisely the type of data you are working with.  When it is not location-sensitive there are other ways to visualise it, but if you want to see this noisy data on a graph, summarised live and presented in a way that supports on the spot decision making - this is the extension for you.
 
 ## Instructions
 
