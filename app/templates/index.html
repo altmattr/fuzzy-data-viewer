@@ -9,11 +9,11 @@
 <body>
     <div class="container">
         <div id="overlay-text">Placeholder</div>
-        <div id="attitude">
-            roll: -, pitch: -, yaw: -
+        <div id="servos">
+            left (1) -, right (3): --
         </div>
-        <div id="pressure">
-            pressure: -, temp: -
+        <div id="relays">
+            water (4): -, buffer (5): -
         </div>
         <div id="status">
             status: -
@@ -26,13 +26,10 @@
         socket.addEventListener('message', function (event) {
             let data = JSON.parse(event.data)
             switch (data.message.type) {
-                case 'ATTITUDE':
-                    const {roll, pitch, yaw} = data.message
-                    document.getElementById('attitude').textContent = `roll: ${rad2user(roll)}, pitch: ${rad2user(pitch)}, yaw: ${rad2user(yaw)}`
-                    break
-                case 'SCALED_PRESSURE':
-                    const {press_abs, temperature} = data.message
-                    document.getElementById('pressure').textContent = `pressure: ${press_abs.toFixed(2)}, temp: ${temperature/100}`
+                case 'SERVO_OUTPUT_RAW':
+                    const {servo1_raw, servo3_raw, servo4_raw, servo5_raw} = data.message
+                    document.getElementById('servos').textContent = `left (1) ${servo1_raw}, right (3): ${servo3_raw}`
+                    document.getElementById('relays').textContent = `water (4): ${data.message.servo4_raw}, buffer (5): ${data.message.servo5_raw}`
                     break
                 case 'STATUSTEXT':
                     document.getElementById('status').textContent = `status: ${data.message.text.join('')}`
@@ -42,10 +39,6 @@
             }
         })
 
-        // Convert radians to a user friendly output
-        function rad2user(value) {
-            return (value * 180 / Math.PI).toFixed(1)
-        }
     </script>
 </body>
 </html>
