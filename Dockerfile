@@ -1,26 +1,31 @@
-FROM alpine:3.18.3
+FROM python:3.11-slim-bookworm AS builder
 
-RUN apk update && apk add nginx
+WORKDIR /working
 
-# Move our nginx configuration to the standard nginx path
-COPY files/nginx.conf /etc/nginx/nginx.conf
+RUN apt-get update
+RUN apt-get install -y git vim
+RUN python -m pip install quart uvicorn
 
-# Add our static files to a common folder to be provided by nginx
-RUN mkdir -p /site
-COPY files/register_service /site/register_service
-COPY site/ /site/
+COPY .vimrc /root/.vimrc
+COPY .vim /root/.vim
+COPY .ssh /root/.ssh
+RUN git config --global user.email "alt.mattr@gmail.com"
+RUN git config --global user.name "Matt Roberts"
 
-# Copy everything for your application
-COPY files/entrypoint.sh /entrypoint.sh
+ENV TERM=xterm-256color
+RUN echo 'export PS1="\[\e[38;5;251m\]\u@$TAG \w > \[\e[0m\]"' >> /root/.bashrc
+
+# copy over our app
+COPY app /app
 
 # Add docker configuration
 LABEL permissions='{\
   "ExposedPorts": {\
-    "80/tcp": {}\
+    "8000/tcp": {}\
   },\
   "HostConfig": {\
     "PortBindings": {\
-      "80/tcp": [\
+      "8000/tcp": [\
         {\
           "HostPort": ""\
         }\
